@@ -1,20 +1,68 @@
-# Dependencies
-/node_modules
+# ==============================================
+#   Transactionify Docs — .gitignore
+#   Docusaurus + Node.js project
+# ==============================================
 
-# Production
-/build
+# -----------------------------------------------
+# Docusaurus build output
+# -----------------------------------------------
+.docusaurus/
+build/
+.cache-loader/
 
-# Generated files
-.docusaurus
-.cache-loader
-
-# Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+# -----------------------------------------------
+# Node.js / npm
+# -----------------------------------------------
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# -----------------------------------------------
+# Environment & secrets — ⚠️ NEVER commit API Keys
+# -----------------------------------------------
+.env
+.env.local
+.env.development
+.env.production
+.env.*.local
+
+# -----------------------------------------------
+# OS files
+# -----------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# -----------------------------------------------
+# Editor / IDE
+# -----------------------------------------------
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# -----------------------------------------------
+# Logs & diagnostics
+# -----------------------------------------------
+logs/
+*.log
+
+# -----------------------------------------------
+# OpenAPI generated files (regenerated on build)
+# -----------------------------------------------
+docs/api-reference/generated/
+
+# -----------------------------------------------
+# Versioned docs snapshot artifacts
+# -----------------------------------------------
+versioned_docs/
+versioned_sidebars/
+versions.json

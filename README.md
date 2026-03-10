@@ -1,41 +1,80 @@
-# Website
+# Transactionify Developer Portal
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Welcome to the **Transactionify Developer Portal**. This portal provides the technical documentation required for **external developers and internal LoanPro engineers** to integrate with and effectively use the **Transactionify** service.
 
-## Installation
+Transactionify is a service designed to **manage accounts and process financial transactions** through a modern and scalable API. It enables applications to create and manage accounts, process payments, review transaction history, and automate financial workflows within the LoanPro ecosystem.
 
-```bash
-yarn
-```
+---
 
-## Local Development
+## Purpose of the Portal
 
-```bash
-yarn start
-```
+This portal centralizes all the information needed to work with the Transactionify API, including:
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+- API endpoint documentation
+- Integration guides
+- Request and response examples
+- Authentication requirements
+- Usage best practices
+- Error handling and response codes
 
-## Build
+The goal is to enable **fast, secure, and reliable integration** of Transactionify into both internal and third-party applications.
 
-```bash
-yarn build
-```
+---
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Service Capabilities
 
-## Deployment
+The **Transactionify** service provides key functionality for managing financial operations, including:
 
-Using SSH:
+- **Account creation and management**
+- **Payment processing**
+- **Transaction retrieval**
+- **Transaction history management**
+- **Automation of transaction workflows**
+- **Integration through REST APIs**
 
-```bash
-USE_SSH=true yarn deploy
-```
+These capabilities allow organizations to build robust financial solutions using LoanPro’s infrastructure.
 
-Not using SSH:
+---
 
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
+## Audience
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This portal is intended for:
+
+- **External developers** integrating financial services with the LoanPro platform
+- **Internal LoanPro engineers** who build, maintain, or extend services related to Transactionify
+- **Integration teams and technology partners** who need to interact with the API
+
+---
+
+## What You Will Find in This Documentation
+
+Within this portal you will find:
+
+- **Quick start guides** to begin using the API
+- **Detailed endpoint documentation** for accounts and transactions
+- **Request examples** in multiple languages
+- **Authentication and security information**
+- **Data schemas and object definitions**
+- **Best practices for reliable integrations**
+
+---
+
+## Quick Start
+
+To begin using Transactionify:
+
+1. Review the **Getting Started** section to configure your environment.
+2. Obtain your **authentication credentials**.
+3. Explore the available **account and transaction endpoints**.
+4. Send your first request to the API.
+
+---
+
+## Support
+
+If you have questions or encounter issues during integration, please refer to the **Troubleshooting** section or contact the appropriate LoanPro team for assistance.
+
+---
+
+This portal is designed to help you **integrate with Transactionify quickly, securely, and reliably**, enabling you to build financial solutions on top of the LoanPro platform.
+
