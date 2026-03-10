@@ -74,7 +74,17 @@ To begin using Transactionify:
 
 If you have questions or encounter issues during integration, please refer to the **Troubleshooting** section or contact the appropriate LoanPro team for assistance.
 
----
 
 This portal is designed to help you **integrate with Transactionify quickly, securely, and reliably**, enabling you to build financial solutions on top of the LoanPro platform.
 
+---
+## Evaluation
+
+| **Feature**                      | **Implemented**   | **Notes**                  |
+|---------------------------------:|:------------------|:---------------------------|
+| **Docusaurus Site Deployed**     | [ ] Yes / [ ] No  |                            |
+| **Live API Requests (Bonus)**    | [ ] Yes / [ ] No  |                            |
+| **Dark Mode Support (Bonus)**    | [ ] Yes / [ ] No  |                            |
+| **Mermaid Diagrams (Bonus)**     | [ ] Yes / [ ] No  |                            |
+
+---
