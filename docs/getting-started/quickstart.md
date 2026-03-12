@@ -185,7 +185,7 @@ The `id` field in the response is your `account_id`. You will use it to check yo
 
 Now that you have an account, explore what else you can do:
 
-- [Check your balance](/docs/guides/check-balance) — Retrieve the current balance for your account.
 - [Make a payment](/docs/guides/make-payment) — Debit your account with a payment.
+- [Check your balance](/docs/guides/check-balance) — Retrieve the current balance for your account.
 - [View transaction history](/docs/guides/transaction-history) — List and paginate through your transactions.
 - [API Reference](/docs/api-reference/overview) — Full reference for all endpoints, parameters, and response schemas.
