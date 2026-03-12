@@ -2,7 +2,7 @@
 
 Welcome to the **Transactionify Developer Portal**. This portal provides the technical documentation required for **external developers and internal LoanPro engineers** to integrate with and effectively use the **Transactionify** service.
 
-Transactionify is a service designed to **manage accounts and process financial transactions** through a modern and scalable API. It enables applications to create and manage accounts, process payments, review transaction history, and automate financial workflows within the LoanPro ecosystem.
+Transactionify is a service designed to **manage accounts and process financial transactions** through a modern and scalable API. It enables applications to create and manage accounts, process payments and review transaction history.
 
 ---
 
@@ -29,7 +29,6 @@ The **Transactionify** service provides key functionality for managing financial
 - **Payment processing**
 - **Transaction retrieval**
 - **Transaction history management**
-- **Automation of transaction workflows**
 - **Integration through REST APIs**
 
 These capabilities allow organizations to build robust financial solutions using LoanPro’s infrastructure.
@@ -81,7 +80,7 @@ This portal is designed to help you **integrate with Transactionify quickly, sec
 ## Evaluation
 
 | **Feature**                      | **Implemented**   | **Notes**                  |
-|---------------------------------:|:------------------|:---------------------------|
+|:---------------------------------|:------------------|:--------------------------:|
 | **Docusaurus Site Deployed**     | [ ] Yes / [ ] No  |                            |
 | **Live API Requests (Bonus)**    | [ ] Yes / [ ] No  |                            |
 | **Dark Mode Support (Bonus)**    | [ ] Yes / [ ] No  |                            |
