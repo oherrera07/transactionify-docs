@@ -154,7 +154,29 @@ const config = {
       },
     }),
 
-    
+    plugins: [
+    function devProxyPlugin() {
+      return {
+        name: 'dev-proxy-plugin',
+        configureWebpack() {
+          return /** @type {any} */ ({
+            devServer: {
+              // webpack-dev-server v4+ requires proxy to be an array
+              proxy: [
+                {
+                  context: ['/api-proxy'],
+                  target: 'https://gj7edrv1il.execute-api.us-east-1.amazonaws.com',
+                  changeOrigin: true,
+                  secure: true,
+                  pathRewrite: { '^/api-proxy': '' },
+                },
+              ],
+            },
+          });
+        },
+      };
+    },
+  ],
 
 };
 
