@@ -1,12 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import styles from './styles.module.css';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 // In dev, requests go to /api-proxy/* which Docusaurus proxies to the real API.
 // In production build, replace this with your Cloudflare Worker URL.
-const BASE =
-  typeof window !== 'undefined' && window.location.hostname === 'localhost'
-    ? ''
-    : 'https://gj7edrv1il.execute-api.us-east-1.amazonaws.com';
+
 
 const ENDPOINTS = [
   {
@@ -201,17 +199,13 @@ function highlight(raw) {
     );
 }
 
-const PROXY_PREFIX = '/api-proxy';
-
-function getBase() {
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    return PROXY_PREFIX;
-  }
-  return BASE;
+function useApiBase() {
+  const { siteConfig } = useDocusaurusContext();
+  return siteConfig.customFields.apiBase;
 }
 
-function buildUrl(ep, pathVals, queryVals) {
-  let url = getBase() + ep.path;
+function buildUrl(ep, pathVals, queryVals, base) {
+  let url = base + ep.path;
   ep.pathParams.forEach((p) => {
     url = url.replace(`{${p.name}}`, encodeURIComponent(pathVals[p.name] || `{${p.name}}`));
   });
@@ -224,6 +218,7 @@ function buildUrl(ep, pathVals, queryVals) {
 
 // ── Endpoint Panel ────────────────────────────────────────────────────────
 function EndpointPanel({ ep, apiKey }) {
+  const apiBase = useApiBase();
   const initPath  = Object.fromEntries(ep.pathParams.map((p) => [p.name, p.example || '']));
   const initQuery = Object.fromEntries(ep.queryParams.map((p) => [p.name, p.example || '']));
   const initBody  = ep.examples[0]?.body ? JSON.stringify(ep.examples[0].body, null, 2) : '';
@@ -235,7 +230,7 @@ function EndpointPanel({ ep, apiKey }) {
   const [response,  setResponse]  = useState(null);
   const [activeTab, setActiveTab] = useState('body');
 
-  const url = buildUrl(ep, pathVals, queryVals);
+  const url = buildUrl(ep, pathVals, queryVals, apiBase);
 
   const send = useCallback(async () => {
     setLoading(true);
