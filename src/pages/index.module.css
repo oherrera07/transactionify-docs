@@ -1,23 +1,229 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+@keyframes fadeUp    { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes cardUp    { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes glowPulse { 0%,100%{opacity:0.7;transform:translateX(-50%) scale(1)} 50%{opacity:1;transform:translateX(-50%) scale(1.08)} }
+@keyframes glowPulse2{ 0%,100%{opacity:0.5} 50%{opacity:1} }
+@keyframes dotPulse  { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+/* ── Hero ─────────────────────────────────────────────── */
+.hero {
   position: relative;
   overflow: hidden;
+  padding: 100px 2rem 96px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--tx-hero-bg-start) 0%, var(--tx-hero-bg-end) 100%);
+  border-bottom: 1px solid var(--tx-border);
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroGrid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--tx-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--tx-grid-color) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, black 40%, transparent 100%);
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.heroGlow {
+  position: absolute; pointer-events: none;
+  width: 700px; height: 420px; border-radius: 50%;
+  background: radial-gradient(ellipse, var(--tx-glow) 0%, transparent 70%);
+  top: -120px; left: 50%; transform: translateX(-50%);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+.heroGlow2 {
+  position: absolute; pointer-events: none;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(ellipse, var(--tx-glow2) 0%, transparent 70%);
+  bottom: -60px; right: 15%;
+  animation: glowPulse2 9s ease-in-out infinite reverse;
+}
+
+.heroInner {
+  position: relative; z-index: 1;
+  max-width: 660px; margin: 0 auto;
+}
+
+.heroBadge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px; border-radius: 20px;
+  background: rgba(99,102,241,0.1);
+  border: 1px solid rgba(99,102,241,0.2);
+  color: var(--ifm-color-primary-dark);
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+[data-theme='dark'] .heroBadge {
+  color: var(--ifm-color-primary-lighter);
+}
+
+.heroBadgeDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ifm-color-primary); display: inline-block;
+  animation: dotPulse 2s infinite;
+}
+
+.heroH1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 800; line-height: 1.12; letter-spacing: -1px;
+  color: var(--tx-text); margin-bottom: 20px;
+  animation: fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) 0.07s both;
+}
+
+.heroAccent {
+  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-primary-lighter));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.heroSub {
+  font-size: 1.05rem; color: var(--tx-text-muted);
+  line-height: 1.7; max-width: 500px; margin: 0 auto 40px;
+  animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.13s both;
+}
+
+.heroBtns {
+  display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+  animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.19s both;
+}
+
+.btnPrimary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: 9px;
+  background: var(--ifm-color-primary); color: #fff !important;
+  font-size: 14px; font-weight: 600; text-decoration: none !important;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+}
+.btnPrimary:hover {
+  background: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.4);
+  color: #fff !important; text-decoration: none !important;
+}
+.btnPrimary:active { transform: translateY(0); }
+
+.btnSecondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 24px; border-radius: 9px;
+  border: 1.5px solid var(--tx-border-card);
+  color: var(--tx-text) !important;
+  font-size: 14px; font-weight: 600; text-decoration: none !important;
+  background: transparent;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s, color 0.2s;
+}
+.btnSecondary:hover {
+  border-color: var(--ifm-color-primary-light);
+  background: rgba(99,102,241,0.08);
+  color: var(--ifm-color-primary) !important;
+  transform: translateY(-2px); text-decoration: none !important;
+}
+.btnSecondary:active { transform: translateY(0); }
+
+/* ── Cards section ────────────────────────────────────── */
+.cardsSection {
+  padding: 72px 2rem 88px;
+  background: var(--tx-bg-surface);
+}
+
+.cardsInner { max-width: 980px; margin: 0 auto; }
+
+.cardsTitle {
+  font-size: clamp(1.4rem, 3vw, 1.7rem);
+  font-weight: 700; color: var(--tx-text);
+  text-align: center; margin-bottom: 8px; letter-spacing: -0.3px;
+}
+
+.cardsSub {
+  text-align: center; color: var(--tx-text-muted);
+  font-size: 14px; margin-bottom: 40px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* ── Card ─────────────────────────────────────────────── */
+.card {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 28px 24px; border-radius: 14px;
+  background: var(--tx-bg-card);
+  border: 1px solid var(--tx-border-card);
+  text-decoration: none !important;
+  transition: border-color 0.25s, background 0.25s,
+              transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s;
+  animation: cardUp 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  animation-fill-mode: both;
+}
+.card:hover {
+  border-color: var(--tx-card-hover-border);
+  background: var(--tx-card-hover-bg);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(99,102,241,0.1);
+  text-decoration: none !important;
+}
+.card:active { transform: translateY(-2px); }
+
+.cardIcon {
+  width: 44px; height: 44px; border-radius: 11px;
+  background: var(--tx-icon-bg);
+  border: 1px solid var(--tx-icon-border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--tx-icon-color); flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+.card:hover .cardIcon {
+  background: rgba(99,102,241,0.18);
+  border-color: rgba(99,102,241,0.35);
+  transform: scale(1.1);
+}
+.cardIcon svg { width: 20px; height: 20px; }
+
+.cardTitle {
+  font-size: 15.5px; font-weight: 700;
+  color: var(--tx-text); margin: 0; letter-spacing: -0.2px;
+  transition: color 0.2s;
+}
+.card:hover .cardTitle { color: var(--ifm-color-primary); }
+
+.cardDesc {
+  font-size: 13.5px; color: var(--tx-text-muted);
+  line-height: 1.65; flex: 1; margin: 0;
+}
+
+.cardLink {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
+  color: var(--ifm-color-primary); margin-top: 4px;
+  transition: gap 0.2s, color 0.2s;
+}
+.card:hover .cardLink { gap: 10px; color: var(--ifm-color-primary-light); }
+
+.cardArrow {
+  width: 14px; height: 14px;
+  transition: transform 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+.card:hover .cardArrow { transform: translateX(4px); }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 996px) {
+  .hero { padding: 72px 1.5rem 64px; }
+  .cardsGrid { grid-template-columns: repeat(2, 1fr); }
+  .cardsSection { padding: 56px 1.5rem 72px; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 56px 1.25rem 52px; }
+  .heroH1 { letter-spacing: -0.5px; }
+  .heroBtns { flex-direction: column; align-items: center; }
+  .btnPrimary, .btnSecondary { width: 100%; justify-content: center; }
+  .cardsGrid { grid-template-columns: 1fr; }
+  .cardsSection { padding: 48px 1.25rem 56px; }
+  .card { padding: 22px 20px; }
+  .heroGlow { width: 340px; height: 240px; }
 }

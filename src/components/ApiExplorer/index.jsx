@@ -2,10 +2,11 @@ import React, { useState, useCallback } from 'react';
 import styles from './styles.module.css';
 
 // In dev, requests go to /api-proxy/* which Docusaurus proxies to the real API.
-// In production build, replace this with your own backend proxy URL.
-const BASE = typeof window !== 'undefined' && window.location.hostname === 'localhost'
-  ? ''   // relative — proxied by Docusaurus dev server
-  : 'https://gj7edrv1il.execute-api.us-east-1.amazonaws.com'; // prod: set your proxy here
+// In production build, replace this with your Cloudflare Worker URL.
+const BASE =
+  typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? ''
+    : 'https://gj7edrv1il.execute-api.us-east-1.amazonaws.com';
 
 const ENDPOINTS = [
   {
@@ -13,12 +14,19 @@ const ENDPOINTS = [
     method: 'POST',
     path: '/api/v1/accounts',
     summary: 'Create account',
-    description: 'Creates a new account with the specified currency. The account starts with a zero balance.',
+    description:
+      'Creates a new account with the specified currency. The account starts with a zero balance.',
     pathParams: [],
     queryParams: [],
     body: true,
     bodyFields: [
-      { name: 'currency', type: 'enum', required: true, enum: ['USD', 'EUR', 'GBP'], description: 'Currency code for the new account' },
+      {
+        name: 'currency',
+        type: 'enum',
+        required: true,
+        enum: ['USD', 'EUR', 'GBP'],
+        description: 'Currency code for the new account',
+      },
     ],
     examples: [
       { label: 'USD', body: { currency: 'USD' } },
@@ -31,20 +39,40 @@ const ENDPOINTS = [
     method: 'POST',
     path: '/api/v1/accounts/{account_id}/payments',
     summary: 'Create payment',
-    description: 'Creates a new payment for the specified account. The payment currency must match the account currency.',
+    description:
+      'Creates a new payment for the specified account. The payment currency must match the account currency.',
     pathParams: [
-      { name: 'account_id', required: true, type: 'uuid', description: 'Account UUID (v7 format)', example: '019a4757-c049-7ea8-a110-2ea110c5a6f8' },
+      {
+        name: 'account_id',
+        required: true,
+        type: 'uuid',
+        description: 'Account UUID (v7 format)',
+        example: '019a4757-c049-7ea8-a110-2ea110c5a6f8',
+      },
     ],
     queryParams: [],
     body: true,
     bodyFields: [
-      { name: 'amount.value', type: 'string', required: true, description: 'Monetary amount — e.g. "100.00"', example: '100.00' },
-      { name: 'amount.currency', type: 'enum', required: true, description: 'Must match the account currency', enum: ['USD', 'EUR', 'GBP'], example: 'USD' },
+      {
+        name: 'amount.value',
+        type: 'string',
+        required: true,
+        description: 'Monetary amount — e.g. "100.00"',
+        example: '100.00',
+      },
+      {
+        name: 'amount.currency',
+        type: 'enum',
+        required: true,
+        description: 'Must match the account currency',
+        enum: ['USD', 'EUR', 'GBP'],
+        example: 'USD',
+      },
     ],
     examples: [
       { label: '$100 USD', body: { amount: { value: '100.00', currency: 'USD' } } },
-      { label: '€50 EUR', body: { amount: { value: '50.00', currency: 'EUR' } } },
-      { label: '£25 GBP', body: { amount: { value: '25.00', currency: 'GBP' } } },
+      { label: '€50 EUR',  body: { amount: { value: '50.00',  currency: 'EUR' } } },
+      { label: '£25 GBP',  body: { amount: { value: '25.00',  currency: 'GBP' } } },
     ],
   },
   {
@@ -52,9 +80,16 @@ const ENDPOINTS = [
     method: 'GET',
     path: '/api/v1/accounts/{account_id}/balance',
     summary: 'Get balance',
-    description: 'Retrieves the current balance for the specified account, including the current server date/time.',
+    description:
+      'Retrieves the current balance for the specified account, including the current server date/time.',
     pathParams: [
-      { name: 'account_id', required: true, type: 'uuid', description: 'Account UUID (v7 format)', example: '019a4757-c049-7ea8-a110-2ea110c5a6f8' },
+      {
+        name: 'account_id',
+        required: true,
+        type: 'uuid',
+        description: 'Account UUID (v7 format)',
+        example: '019a4757-c049-7ea8-a110-2ea110c5a6f8',
+      },
     ],
     queryParams: [],
     body: false,
@@ -65,29 +100,76 @@ const ENDPOINTS = [
     method: 'GET',
     path: '/api/v1/accounts/{account_id}/transactions',
     summary: 'List transactions',
-    description: 'Retrieves paginated transaction history for the specified account using cursor-based pagination.',
+    description:
+      'Retrieves paginated transaction history for the specified account using cursor-based pagination.',
     pathParams: [
-      { name: 'account_id', required: true, type: 'uuid', description: 'Account UUID (v7 format)', example: '019a4757-c049-7ea8-a110-2ea110c5a6f8' },
+      {
+        name: 'account_id',
+        required: true,
+        type: 'uuid',
+        description: 'Account UUID (v7 format)',
+        example: '019a4757-c049-7ea8-a110-2ea110c5a6f8',
+      },
     ],
     queryParams: [
-      { name: 'limit', required: false, type: 'integer', description: 'Results per page (1–100, default 20)', example: '20' },
-      { name: 'cursor', required: false, type: 'string', description: 'Pagination cursor from a previous response', example: '' },
+      {
+        name: 'limit',
+        required: false,
+        type: 'integer',
+        description: 'Results per page (1–100, default 20)',
+        example: '20',
+      },
+      {
+        name: 'cursor',
+        required: false,
+        type: 'string',
+        description: 'Pagination cursor from a previous response',
+        example: '',
+      },
     ],
     body: false,
     examples: [],
   },
 ];
 
+// Method badge colors — brand-consistent
 const METHOD_COLORS = {
-  GET:    { bg: 'var(--ifm-color-success-lightest, #eaf4ee)', color: 'var(--ifm-color-success-darkest, #1e6e40)' },
-  POST:   { bg: 'var(--ifm-color-info-lightest,    #eaf0fb)', color: 'var(--ifm-color-info-darkest,    #1e3d8c)' },
-  PUT:    { bg: '#fdf4e3',                                     color: '#b06010' },
-  PATCH:  { bg: '#fdf4e3',                                     color: '#b06010' },
-  DELETE: { bg: 'var(--ifm-color-danger-lightest,  #fdf0ed)', color: 'var(--ifm-color-danger-darkest,  #c0392b)' },
+  GET:    { bg: 'rgba(16,185,129,0.1)',  color: '#059669' },
+  POST:   { bg: 'rgba(99,102,241,0.1)',  color: '#4f46e5' },
+  PUT:    { bg: 'rgba(245,158,11,0.1)',  color: '#b45309' },
+  PATCH:  { bg: 'rgba(245,158,11,0.1)',  color: '#b45309' },
+  DELETE: { bg: 'rgba(239,68,68,0.1)',   color: '#dc2626' },
 };
 
-function MethodBadge({ method, size = 'sm' }) {
-  const s = METHOD_COLORS[method] || {};
+// Dark mode overrides for method badges
+const METHOD_COLORS_DARK = {
+  GET:    { bg: 'rgba(16,185,129,0.15)',  color: '#34d399' },
+  POST:   { bg: 'rgba(99,102,241,0.15)',  color: '#a5b4fc' },
+  PUT:    { bg: 'rgba(245,158,11,0.15)',  color: '#fbbf24' },
+  PATCH:  { bg: 'rgba(245,158,11,0.15)',  color: '#fbbf24' },
+  DELETE: { bg: 'rgba(239,68,68,0.15)',   color: '#f87171' },
+};
+
+function useIsDark() {
+  const [dark, setDark] = React.useState(() =>
+    typeof document !== 'undefined'
+      ? document.documentElement.getAttribute('data-theme') === 'dark'
+      : false
+  );
+  React.useEffect(() => {
+    const obs = new MutationObserver(() => {
+      setDark(document.documentElement.getAttribute('data-theme') === 'dark');
+    });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => obs.disconnect();
+  }, []);
+  return dark;
+}
+
+function MethodBadge({ method, size = 'Sm' }) {
+  const dark = useIsDark();
+  const palette = dark ? METHOD_COLORS_DARK : METHOD_COLORS;
+  const s = palette[method] || {};
   return (
     <span
       className={styles[`badge${size}`]}
@@ -106,10 +188,14 @@ function highlight(raw) {
     .replace(
       /("(?:[^"\\]|\\.)*"(\s*:)?|\b(?:true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
       (m) => {
-        if (m.startsWith('"') && m.trimEnd().endsWith(':')) return `<span class="${styles.jKey}">${m}</span>`;
-        if (m.startsWith('"')) return `<span class="${styles.jStr}">${m}</span>`;
-        if (m === 'true' || m === 'false') return `<span class="${styles.jBool}">${m}</span>`;
-        if (m === 'null') return `<span class="${styles.jNull}">${m}</span>`;
+        if (m.startsWith('"') && m.trimEnd().endsWith(':'))
+          return `<span class="${styles.jKey}">${m}</span>`;
+        if (m.startsWith('"'))
+          return `<span class="${styles.jStr}">${m}</span>`;
+        if (m === 'true' || m === 'false')
+          return `<span class="${styles.jBool}">${m}</span>`;
+        if (m === 'null')
+          return `<span class="${styles.jNull}">${m}</span>`;
         return `<span class="${styles.jNum}">${m}</span>`;
       }
     );
@@ -138,15 +224,15 @@ function buildUrl(ep, pathVals, queryVals) {
 
 // ── Endpoint Panel ────────────────────────────────────────────────────────
 function EndpointPanel({ ep, apiKey }) {
-  const initPath = Object.fromEntries(ep.pathParams.map((p) => [p.name, p.example || '']));
+  const initPath  = Object.fromEntries(ep.pathParams.map((p) => [p.name, p.example || '']));
   const initQuery = Object.fromEntries(ep.queryParams.map((p) => [p.name, p.example || '']));
-  const initBody = ep.examples[0]?.body ? JSON.stringify(ep.examples[0].body, null, 2) : '';
+  const initBody  = ep.examples[0]?.body ? JSON.stringify(ep.examples[0].body, null, 2) : '';
 
-  const [pathVals, setPathVals]   = useState(initPath);
+  const [pathVals,  setPathVals]  = useState(initPath);
   const [queryVals, setQueryVals] = useState(initQuery);
-  const [bodyVal, setBodyVal]     = useState(initBody);
-  const [loading, setLoading]     = useState(false);
-  const [response, setResponse]   = useState(null);
+  const [bodyVal,   setBodyVal]   = useState(initBody);
+  const [loading,   setLoading]   = useState(false);
+  const [response,  setResponse]  = useState(null);
   const [activeTab, setActiveTab] = useState('body');
 
   const url = buildUrl(ep, pathVals, queryVals);
@@ -155,16 +241,17 @@ function EndpointPanel({ ep, apiKey }) {
     setLoading(true);
     setResponse(null);
     const headers = { 'Content-Type': 'application/json' };
-    if (apiKey) headers['Authorization'] = apiKey.startsWith('APIKey ') ? apiKey : `APIKey ${apiKey}`;
+    if (apiKey)
+      headers['Authorization'] = apiKey.startsWith('APIKey ') ? apiKey : `APIKey ${apiKey}`;
     const opts = { method: ep.method, headers };
     if (ep.body && bodyVal.trim()) opts.body = bodyVal.trim();
     const t0 = Date.now();
     try {
       const res = await fetch(url, opts);
-      const ms = Date.now() - t0;
+      const ms  = Date.now() - t0;
       const respHeaders = {};
       res.headers.forEach((v, k) => (respHeaders[k] = v));
-      const ct = res.headers.get('content-type') || '';
+      const ct   = res.headers.get('content-type') || '';
       const body = ct.includes('json')
         ? JSON.stringify(await res.json(), null, 2)
         : await res.text();
@@ -176,28 +263,40 @@ function EndpointPanel({ ep, apiKey }) {
   }, [url, ep, bodyVal, apiKey]);
 
   const statusClass =
-    !response ? '' :
-    response.status === 0    ? styles.s0xx :
-    response.status < 300    ? styles.s2xx :
-    response.status < 500    ? styles.s4xx : styles.s5xx;
+    !response          ? '' :
+    response.status === 0   ? styles.s0xx :
+    response.status < 300   ? styles.s2xx :
+    response.status < 500   ? styles.s4xx : styles.s5xx;
 
-  const pathHtml = ep.path.replace(/{([^}]+)}/g, '<span class="' + styles.pathVar + '">{$1}</span>');
+  // Build path HTML with CSS-module pathVar class
+  const pathHtml = ep.path.replace(
+    /{([^}]+)}/g,
+    `<span class="${styles.pathVar}">{$1}</span>`
+  );
 
   return (
     <div className={styles.panel}>
       {/* Header */}
       <div className={styles.panelHeader}>
         <MethodBadge method={ep.method} size="Lg" />
-        <code className={styles.panelPath} dangerouslySetInnerHTML={{ __html: pathHtml }} />
+        <code
+          className={styles.panelPath}
+          dangerouslySetInnerHTML={{ __html: pathHtml }}
+        />
       </div>
       <p className={styles.panelDesc}>{ep.description}</p>
 
       {/* Auth note */}
       <div className={styles.authNote}>
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{flexShrink:0}}>
-          <path d="M8 1a3.5 3.5 0 0 0-3.5 3.5v1.25H3A1 1 0 0 0 2 6.75v7A1 1 0 0 0 3 14.75h10a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1.5V4.5A3.5 3.5 0 0 0 8 1zm0 1.5A2 2 0 0 1 10 4.5v1.25H6V4.5A2 2 0 0 1 8 2.5z" fill="currentColor"/>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
+          <path
+            d="M8 1a3.5 3.5 0 0 0-3.5 3.5v1.25H3A1 1 0 0 0 2 6.75v7A1 1 0 0 0 3 14.75h10a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1.5V4.5A3.5 3.5 0 0 0 8 1zm0 1.5A2 2 0 0 1 10 4.5v1.25H6V4.5A2 2 0 0 1 8 2.5z"
+            fill="currentColor"
+          />
         </svg>
-        Requires <strong style={{margin:'0 4px'}}>Authorization: APIKey &lt;key&gt;</strong> — set your key at the top.
+        Requires{' '}
+        <strong style={{ margin: '0 4px' }}>Authorization: APIKey &lt;key&gt;</strong> — set your
+        key at the top.
       </div>
 
       {/* Path params */}
@@ -343,7 +442,7 @@ function EndpointPanel({ ep, apiKey }) {
 
 // ── Root Component ────────────────────────────────────────────────────────
 export default function ApiExplorer() {
-  const [apiKey, setApiKey]   = useState('');
+  const [apiKey,   setApiKey]   = useState('');
   const [selected, setSelected] = useState(null);
 
   const groups = ENDPOINTS.reduce((acc, ep, i) => {
@@ -398,11 +497,16 @@ export default function ApiExplorer() {
             <div className={styles.welcome}>
               <div className={styles.welcomeTitle}>API Explorer</div>
               <p className={styles.welcomeSub}>
-                Select an endpoint from the sidebar to inspect parameters, send live requests, and view responses.
+                Select an endpoint from the sidebar to inspect parameters, send live
+                requests, and view responses.
               </p>
               <div className={styles.welcomeChips}>
                 {ENDPOINTS.map((ep, i) => (
-                  <button key={i} className={styles.welcomeChip} onClick={() => setSelected(i)}>
+                  <button
+                    key={i}
+                    className={styles.welcomeChip}
+                    onClick={() => setSelected(i)}
+                  >
                     <MethodBadge method={ep.method} size="Xs" />
                     {ep.summary}
                   </button>
@@ -410,11 +514,7 @@ export default function ApiExplorer() {
               </div>
             </div>
           ) : (
-            <EndpointPanel
-              key={selected}
-              ep={ENDPOINTS[selected]}
-              apiKey={apiKey}
-            />
+            <EndpointPanel key={selected} ep={ENDPOINTS[selected]} apiKey={apiKey} />
           )}
         </div>
       </div>

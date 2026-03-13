@@ -1,30 +1,292 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* You can override the default Infima variables here. */
+/* ── Brand palette ───────────────────────────────────── */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-color-primary:         #6366f1;
+  --ifm-color-primary-dark:    #4f46e5;
+  --ifm-color-primary-darker:  #4338ca;
+  --ifm-color-primary-darkest: #3730a3;
+  --ifm-color-primary-light:   #818cf8;
+  --ifm-color-primary-lighter: #a5b4fc;
+  --ifm-color-primary-lightest:#eef2ff;
+
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
+  --ifm-heading-font-weight: 800;
+  --ifm-button-border-radius: 9px;
+  --ifm-navbar-height: 56px;
+  --ifm-code-font-size: 90%;
+  --ifm-global-radius: 9px;
+
+  /* light mode tokens */
+  --tx-bg:           #ffffff;
+  --tx-bg-surface:   #f8f9ff;
+  --tx-bg-card:      #ffffff;
+  --tx-border:       rgba(99,102,241,0.12);
+  --tx-border-card:  rgba(0,0,0,0.08);
+  --tx-text:         #0f0f1a;
+  --tx-text-muted:   #6b7280;
+  --tx-text-faint:   #9ca3af;
+  --tx-navbar-bg:    rgba(255,255,255,0.8);
+  --tx-grid-color:   rgba(99,102,241,0.07);
+  --tx-glow:         rgba(99,102,241,0.12);
+  --tx-glow2:        rgba(165,180,252,0.08);
+  --tx-card-hover-bg:rgba(99,102,241,0.04);
+  --tx-card-hover-border: rgba(99,102,241,0.35);
+  --tx-icon-bg:      rgba(99,102,241,0.1);
+  --tx-icon-border:  rgba(99,102,241,0.18);
+  --tx-icon-color:   #4f46e5;
+  --tx-code-bg:      #f8f9ff;
+  --tx-code-border:  rgba(0,0,0,0.07);
+  --tx-hero-bg-start:#f0f0ff;
+  --tx-hero-bg-end:  #ffffff;
+  --tx-announce-bg:  #eef2ff;
+  --tx-announce-border: rgba(99,102,241,0.2);
+  --tx-announce-text: #3730a3;
+  --tx-footer-bg:    #f8f9ff;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --tx-bg:           #0a0a0f;
+  --tx-bg-surface:   #0d0b1e;
+  --tx-bg-card:      rgba(255,255,255,0.03);
+  --tx-border:       rgba(255,255,255,0.07);
+  --tx-border-card:  rgba(255,255,255,0.07);
+  --tx-text:         #e2e8f0;
+  --tx-text-muted:   rgba(226,232,240,0.55);
+  --tx-text-faint:   rgba(226,232,240,0.3);
+  --tx-navbar-bg:    rgba(10,10,15,0.75);
+  --tx-grid-color:   rgba(99,102,241,0.06);
+  --tx-glow:         rgba(99,102,241,0.18);
+  --tx-glow2:        rgba(165,180,252,0.08);
+  --tx-card-hover-bg:rgba(99,102,241,0.06);
+  --tx-card-hover-border: rgba(99,102,241,0.4);
+  --tx-icon-bg:      rgba(99,102,241,0.12);
+  --tx-icon-border:  rgba(99,102,241,0.2);
+  --tx-icon-color:   #818cf8;
+  --tx-code-bg:      rgba(255,255,255,0.03);
+  --tx-code-border:  rgba(255,255,255,0.08);
+  --tx-hero-bg-start:#0a0a0f;
+  --tx-hero-bg-end:  #0d0b1e;
+  --tx-announce-bg:  #1e1b4b;
+  --tx-announce-border: rgba(99,102,241,0.3);
+  --tx-announce-text: rgba(255,255,255,0.75);
+  --tx-footer-bg:    #06060d;
+
+  --ifm-background-color: #0a0a0f;
+  --ifm-background-surface-color: #0d0b1e;
+  --ifm-color-content: #e2e8f0;
+  --ifm-color-content-secondary: rgba(226,232,240,0.55);
+  --ifm-heading-color: #f1f5f9;
+  --ifm-toc-border-color: rgba(255,255,255,0.08);
+  --ifm-link-color: #818cf8;
 }
+
+html { scroll-behavior: smooth; }
+
+/* ── Announcement bar ────────────────────────────────── */
+div[class*='announcementBar'] {
+  background: var(--tx-announce-bg) !important;
+  border-bottom: 1px solid var(--tx-announce-border) !important;
+  color: var(--tx-announce-text) !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+div[class*='announcementBar'] a { color: var(--ifm-color-primary) !important; text-decoration: underline; }
+div[class*='announcementBarClose'] { color: var(--tx-text-muted) !important; }
+
+/* ── Navbar floating glass ───────────────────────────── */
+.navbar {
+  background: var(--tx-navbar-bg) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid var(--tx-border) !important;
+  box-shadow: none !important;
+  transition: background 0.3s !important;
+}
+.navbar__title { font-weight: 700; font-size: 15px; }
+.navbar__link {
+  font-size: 13.5px; font-weight: 500;
+  border-radius: 7px; padding: 6px 12px;
+  transition: color 0.15s, background 0.15s !important;
+}
+.navbar__link:hover, .navbar__link--active {
+  background: rgba(99,102,241,0.1) !important;
+  color: var(--ifm-color-primary) !important;
+}
+.navbar__search-input {
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.navbar__search-input:focus {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2) !important;
+}
+.navbar-cta-button {
+  padding: 7px 16px !important;
+  border-radius: 8px !important;
+  background: var(--ifm-color-primary) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
+  box-shadow: 0 2px 12px rgba(99,102,241,0.3) !important;
+}
+.navbar-cta-button:hover {
+  background: var(--ifm-color-primary-dark) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.4) !important;
+}
+
+/* ── Sidebar ─────────────────────────────────────────── */
+.menu__link {
+  border-radius: 7px; font-size: 13.5px;
+  transition: background 0.15s, color 0.15s !important;
+}
+.menu__link:hover:not(.menu__link--active) {
+  background: rgba(99,102,241,0.07) !important;
+  color: var(--ifm-color-primary) !important;
+}
+.menu__link--active {
+  background: rgba(99,102,241,0.12) !important;
+  color: var(--ifm-color-primary-dark) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Code blocks ─────────────────────────────────────── */
+.prism-code { font-family: 'JetBrains Mono', monospace !important; font-size: 13px !important; }
+div[class*='codeBlockContainer'] {
+  border-radius: 12px !important;
+  border: 1px solid var(--tx-code-border) !important;
+  overflow: hidden;
+  transition: border-color 0.2s !important;
+}
+div[class*='codeBlockContainer']:hover { border-color: rgba(99,102,241,0.3) !important; }
+
+/* ── Markdown ────────────────────────────────────────── */
+.markdown a {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(99,102,241,0.25);
+  transition: color 0.15s, border-color 0.15s;
+}
+.markdown a:hover {
+  color: var(--ifm-color-primary-light) !important;
+  border-bottom-color: rgba(99,102,241,0.5);
+}
+
+/* ══════════════════════════════════════════════════════
+   FOOTER — centered, responsive, branded
+   ══════════════════════════════════════════════════════ */
+.footer {
+  background: var(--tx-footer-bg) !important;
+  border-top: 1px solid var(--tx-border) !important;
+  padding: 64px 24px 40px !important;
+}
+
+/* The actual row that holds the columns */
+.footer .row {
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+/* Each column — equal spacing via padding */
+.footer__col {
+  text-align: left !important;
+  padding: 0 32px !important;
+  margin-bottom: 40px !important;
+}
+
+/* Remove Docusaurus default col sizing — let content size itself */
+.footer .col {
+  flex: 0 0 auto !important;
+  max-width: none !important;
+  width: auto !important;
+}
+
+.footer__title {
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 700 !important;
+  color: var(--tx-text) !important;
+  margin-bottom: 14px !important;
+}
+
+.footer__link-item {
+  font-size: 13px !important;
+  color: var(--tx-text-muted) !important;
+  line-height: 2.1 !important;
+  transition: color 0.15s, padding-left 0.15s !important;
+  text-decoration: none !important;
+  display: block;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary) !important;
+  padding-left: 4px !important;
+  text-decoration: none !important;
+}
+
+/* Copyright bar */
+.footer__bottom {
+  text-align: center !important;
+  border-top: 1px solid var(--tx-border) !important;
+  padding-top: 28px !important;
+  margin-top: 0 !important;
+}
+
+.footer__copyright {
+  font-size: 12px !important;
+  color: var(--tx-text-faint) !important;
+}
+
+/* Tablet ≤768px */
+@media (max-width: 768px) {
+  .footer {
+    padding: 48px 20px 32px !important;
+  }
+  .footer__col {
+    padding: 0 20px !important;
+  }
+}
+
+/* Mobile ≤560px */
+@media (max-width: 560px) {
+  .footer {
+    padding: 40px 20px 28px !important;
+  }
+  .footer .row {
+    flex-direction: column !important;
+  }
+  .footer__col {
+    padding: 0 4px !important;
+    margin-bottom: 28px !important;
+  }
+  .footer__items {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0 20px !important;
+  }
+}
+
+/* ── Pagination ──────────────────────────────────────── */
+.pagination-nav__link {
+  border-radius: 10px !important;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s !important;
+}
+.pagination-nav__link:hover {
+  border-color: rgba(99,102,241,0.35) !important;
+  background: rgba(99,102,241,0.05) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ── TOC ─────────────────────────────────────────────── */
+.table-of-contents__link { font-size: 13px !important; transition: color 0.15s !important; }
+.table-of-contents__link:hover { color: var(--ifm-color-primary) !important; }
+.table-of-contents__link--active { color: var(--ifm-color-primary-dark) !important; font-weight: 600 !important; }
+
+/* ── Page transition ─────────────────────────────────── */
+.main-wrapper { animation: pageFadeIn 0.3s ease both; }
+@keyframes pageFadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
