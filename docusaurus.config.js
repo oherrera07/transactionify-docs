@@ -8,7 +8,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const config = {
   title: 'Transactionify',
   tagline: 'Fast, reliable payment and transaction APIs for modern developers.',
-  favicon: 'img/favicon.png',
+  favicon: 'img/favicon.ico',
 
   url: 'https://oherrera07.github.io',
   baseUrl: '/transactionify-docs/',
@@ -27,7 +27,7 @@ const config = {
     apiBase: isProd
       ? 'https://transactionify-proxy.oherrera0704.workers.dev'
       : '/api-proxy',
-  }, // 👈 esta llave faltaba
+  }, 
 
   i18n: {
     defaultLocale: 'en',
@@ -73,10 +73,10 @@ const config = {
   themeConfig:
     ({
       navbar: {
-        title: 'Transactionify',
         logo: {
           alt: 'Transactionify Logo',
-          src: 'img/favicon.png',
+          src: 'img/logo.svg',
+          srcDark: 'img/logo-dark.svg',
         },
         items: [
           {
