@@ -32,7 +32,7 @@ const NAV_CARDS = [
   {
     title: 'API Explorer',
     description: 'Try the Transactionify API live in our interactive sandbox — no setup required, just your API key.',
-    link: '/docs/Sandbox/api-explorer',
+    link: '/docs/sandbox/api-explorer',
     label: 'Open explorer',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
