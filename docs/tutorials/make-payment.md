@@ -228,6 +228,5 @@ A successful request returns HTTP `200` with the payment details:
 
 ## What's Next?
 
-- [Check your balance](/docs/guides/check-balance) — See how the payment affected your account balance.
-- [View transaction history](/docs/guides/transaction-history) — Find the payment you just created in your transaction list.
-- [API Reference](/docs/api-reference/overview) — Full reference for all endpoints and schemas.
+- [Check your balance](/docs/tutorials/check-balance) — See how the payment affected your account balance.
+- [View transaction history](/docs/tutorials/transaction-history) — Find the payment you just created in your transaction list.

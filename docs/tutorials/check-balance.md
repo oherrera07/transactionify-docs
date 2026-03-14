@@ -168,5 +168,4 @@ A successful request returns HTTP `200` with the account balance and current tim
 
 ## What's Next?
 
-- [View transaction history](/docs/guides/transaction-history) — See all transactions that affected this balance.
-- [API Reference](/docs/api-reference/overview) — Full reference for all endpoints and schemas.
+- [View transaction history](/docs/tutorials/transaction-history) — See all transactions that affected this balance.

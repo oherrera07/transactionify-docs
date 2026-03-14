@@ -26,7 +26,7 @@ GET /api/v1/accounts/{account_id}/transactions
 ## Prerequisites
 
 - A valid **API Key**.
-- An existing **account ID** with at least one transaction — follow the [Make a Payment](/docs/guides/make-payment) guide if you haven't created one yet.
+- An existing **account ID** with at least one transaction — follow the [Make a Payment](/docs/tutorials/make-payment) guide if you haven't created one yet.
 
 ---
 
@@ -279,4 +279,3 @@ The `next_cursor` is an opaque base64-encoded string that points to the last ite
 
 ## What's Next?
 
-- [API Reference](/docs/api-reference/overview) — Full reference for all endpoints and schemas.
