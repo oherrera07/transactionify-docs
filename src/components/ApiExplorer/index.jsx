@@ -219,6 +219,7 @@ function buildUrl(ep, pathVals, queryVals, base) {
 // ── Endpoint Panel ────────────────────────────────────────────────────────
 function EndpointPanel({ ep, apiKey }) {
   const apiBase = useApiBase();
+  console.log('apiBase:', apiBase);
   const initPath  = Object.fromEntries(ep.pathParams.map((p) => [p.name, p.example || '']));
   const initQuery = Object.fromEntries(ep.queryParams.map((p) => [p.name, p.example || '']));
   const initBody  = ep.examples[0]?.body ? JSON.stringify(ep.examples[0].body, null, 2) : '';
