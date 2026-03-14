@@ -80,10 +80,10 @@ This portal is designed to help you **integrate with Transactionify quickly, sec
 ## Evaluation
 
 | **Feature**                      | **Implemented**   | **Notes**                  |
-|:---------------------------------|:------------------|:--------------------------:|
-| **Docusaurus Site Deployed**     | [ ] Yes / [ ] No  |                            |
-| **Live API Requests (Bonus)**    | [ ] Yes / [ ] No  |                            |
-| **Dark Mode Support (Bonus)**    | [ ] Yes / [ ] No  |                            |
+|:---------------------------------|:------------------|----------------------------|
+| **Docusaurus Site Deployed**     | [ x ] Yes / [ ] No  |https://oherrera07.github.io/transactionify-docs/                            |
+| **Live API Requests (Bonus)**    | [ x ] Yes / [ ] No  |https://oherrera07.github.io/transactionify-docs/docs/sandbox/api-explorer                            |
+| **Dark Mode Support (Bonus)**    | [ x ] Yes / [ ] No  |                            |
 | **Mermaid Diagrams (Bonus)**     | [ ] Yes / [ ] No  |                            |
 
 ---
