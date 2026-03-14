@@ -96,11 +96,11 @@ const config = {
             label: 'API Explorer',
           },
           {
-            href: 'https://dashboard.transactionify.io',
-            label: 'Get API Key',
-            position: 'right',
-            className: 'navbar-cta-button',
+            to: '/docs/architectural-overview/architecture',
+            position: 'left',
+            label: 'Architecture',
           },
+          
         ],
       },
 
