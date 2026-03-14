@@ -115,24 +115,7 @@ const config = {
               { label: 'API Explorer', to: '/docs/sandbox/api-explorer' },
             ],
           },
-          {
-            title: 'Resources',
-            items: [
-              { label: 'Changelog', to: '/changelog' },
-              { label: 'Status',    href: 'https://status.transactionify.io' },
-              { label: 'Support',   href: 'https://support.transactionify.io' },
-            ],
-          },
-          {
-            title: 'Company',
-            items: [
-              { label: 'About',   href: 'https://transactionify.io/about' },
-              { label: 'Careers', href: 'https://transactionify.io/careers' },
-              { label: 'Contact', href: 'https://transactionify.io/contact' },
-              { label: 'Privacy', href: 'https://transactionify.io/privacy' },
-              { label: 'Terms',   href: 'https://transactionify.io/terms' },
-            ],
-          },
+          
         ],
         copyright: `© ${new Date().getFullYear()} Transactionify. All rights reserved.`,
       },
