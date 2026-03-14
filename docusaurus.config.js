@@ -100,7 +100,11 @@ const config = {
             position: 'left',
             label: 'Architecture',
           },
-          
+          {
+            to: '/docs/internal-docs/engineering-guide',
+            position: 'left',
+            label: 'Internal Guide',
+          },
         ],
       },
 
