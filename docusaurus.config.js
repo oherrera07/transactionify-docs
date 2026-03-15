@@ -23,6 +23,11 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   customFields: {
     apiBase: isProd
       ? 'https://transactionify-proxy.oherrera0704.workers.dev'
@@ -86,10 +91,24 @@ const config = {
             label: 'Quickstart',
           },
           {
-            to: '/docs/tutorials/make-payment',
-            position: 'left',
-            label: 'Tutorials',
+        type: 'dropdown',
+        label: 'Tutorials',
+        position: 'left', // or 'right'
+        items: [
+          {
+            label: 'Make Payment',
+            href: '/docs/tutorials/make-payment',
           },
+          {
+            label: 'Check Balance',
+            href: '/docs/tutorials/check-balance',
+          },
+          {
+            label: 'Transaction History',
+            href: '/docs/tutorials/transaction-history',
+          },
+        ],
+      },
           {
             to: '/docs/sandbox/api-explorer',
             position: 'left',
@@ -105,6 +124,21 @@ const config = {
             position: 'left',
             label: 'Internal Guide',
           },
+          {
+        type: 'dropdown',
+        label: 'Downloads',
+        position: 'left', // or 'right'
+        items: [
+          {
+            label: 'Postman Collection',
+            href: '/files/postman_collection.json',
+          },
+          {
+            label: 'Postman Environment',
+            href: '/files/postman_environment.json',
+          },
+        ],
+      },
         ],
       },
 
@@ -117,6 +151,13 @@ const config = {
               { label: 'Quick start', to: '/docs/getting-started/quickstart' },
               { label: 'Guides',      to: '/docs/tutorials/make-payment' },
               { label: 'API Explorer', to: '/docs/sandbox/api-explorer' },
+            ],
+          },
+          {
+            title: 'Downloads',
+            items: [
+              { label: 'Postman Collection', href: '/files/postman_collection.json', target: '_blank', },
+              { label: 'Postman Environment',      href: '/files/postman_environment.json', target: '_blank', },
             ],
           },
           

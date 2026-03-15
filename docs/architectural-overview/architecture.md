@@ -12,26 +12,14 @@ Transactionify is a serverless REST API built on AWS. This page explains how the
 ## Infrastructure overview
 
 Every request follows this path:
-
-```
-Developer app
-     │
-     │  HTTPS + Authorization: APIKey <key>
-     ▼
-API Gateway (HTTP API v2)
-     │
-     ▼
-Lambda authorizer ──► DynamoDB (validates key)
-     │
-     │  Authorized
-     ▼
-Lambda handler (one per endpoint)
-     │
-     ▼
-DynamoDB (single table)
-     │
-     ▼
-HTTP response
+```mermaid
+flowchart TD
+    A[Developer app] -->|HTTPS + Authorization: APIKey| B[API Gateway HTTP API v2]
+    B --> C[Lambda authorizer]
+    C -->|Validates key| D[(DynamoDB)]
+    C -->|Authorized| E[Lambda handler]
+    E --> D
+    D --> F[HTTP response]
 ```
 
 ### Components
@@ -55,26 +43,29 @@ The provisioning Lambda is intentionally excluded from the API Gateway routes. A
 ## Code structure
 
 The Python source follows a layered service architecture with four distinct layers:
-
 ```
-handlers/
-  └── api/rest/
-        ├── account/create/
-        ├── payment/create/
-        ├── balance/get/
-        └── transaction/list/
-  └── authorizer/
-  └── provisioning/
-
-services/
-  ├── account service
-  ├── payment service
-  └── transaction service
-
-tools/
-  ├── generators/
-  ├── validators/
-  └── response/
+src/python/transactionify/
+├── handlers/
+│   ├── api/
+│   │   └── rest/
+│   │       ├── account/
+│   │       │   └── create/
+│   │       ├── payment/
+│   │       │   └── create/
+│   │       ├── balance/
+│   │       │   └── get/
+│   │       └── transaction/
+│   │           └── list/
+│   ├── authorizer/
+│   └── provisioning/
+├── services/
+│   ├── account/
+│   ├── payment/
+│   └── transaction/
+└── tools/
+    ├── generators/
+    ├── validators/
+    └── response/
 ```
 
 ### Handlers
@@ -93,7 +84,6 @@ Pure utility functions with no dependencies on the layers above them. Organized 
 - **Validators** — validate input data such as currency codes, UUID formats, and required fields.
 - **Response** - Responsible for shaping the final HTTP response returned to the caller. Keeps formatting logic (status codes, JSON structure, error messages) out of both handlers and services.
 
-
 :::tip
 Each layer is independently testable. You can unit test a service without invoking Lambda, or test a validator without a database connection.
 :::
@@ -111,7 +101,6 @@ Here is what happens during a `POST /api/v1/accounts` request:
 5. The handler parses the request body and calls the account service.
 6. The account service validates the currency via the validators tool, generates a UUIDv7 account ID via the generators tool, and writes the new account to DynamoDB.
 7. The response layer formats and returns the result:
-
 ```json
 {
   "id": "019a4757-c049-7ea8-a110-2ea110c5a6f8",
@@ -140,7 +129,6 @@ All endpoints require `Authorization: APIKey <key>` in the request header.
 ## Authentication
 
 API keys are provisioned out-of-band via the internal provisioning Lambda. Once issued, a key must be passed on every request:
-
 ```http
 Authorization: APIKey <your-api-key>
 ```
