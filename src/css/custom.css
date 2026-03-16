@@ -95,7 +95,7 @@ div[class*='announcementBar'] {
 div[class*='announcementBar'] a { color: var(--ifm-color-primary) !important; text-decoration: underline; }
 div[class*='announcementBarClose'] { color: var(--tx-text-muted) !important; }
 
-/* ── Navbar floating glass ───────────────────────────── */
+/* ── Navbar ──────────────────────────────────────────── */
 .navbar {
   background: var(--tx-navbar-bg) !important;
   backdrop-filter: blur(16px) !important;
@@ -139,6 +139,62 @@ div[class*='announcementBarClose'] { color: var(--tx-text-muted) !important; }
   box-shadow: 0 4px 20px rgba(99,102,241,0.4) !important;
 }
 
+/* ── Navbar mobile ───────────────────────────────────── */
+.navbar-sidebar {
+  height: 55vh !important;
+  max-height: 100vh !important;
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+[data-theme='dark'] .navbar-sidebar {
+  background: #0a0a0f !important;
+}
+.navbar-sidebar__brand {
+  border-bottom: 1px solid var(--tx-border) !important;
+}
+.navbar-sidebar__items {
+  height: calc(100vh - var(--ifm-navbar-height)) !important;
+  overflow-y: auto !important;
+  padding: 8px !important;
+}
+.navbar-sidebar__item .menu__list-item a.menu__link {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #0f0f1a !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 10px 12px !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+}
+[data-theme='dark'] .navbar-sidebar__item .menu__list-item a.menu__link {
+  color: #e2e8f0 !important;
+}
+.navbar-sidebar__item .menu__list-item a.menu__link:hover {
+  background: rgba(99,102,241,0.1) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+/* ── Dropdown ────────────────────────────────────────── */
+.dropdown__menu {
+  background: var(--tx-navbar-bg) !important;
+  border: 1px solid var(--tx-border) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  border-radius: 10px !important;
+}
+.dropdown__link {
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: 7px;
+  transition: color 0.15s, background 0.15s !important;
+}
+.dropdown__link:hover {
+  background: rgba(99,102,241,0.1) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
 /* ── Sidebar ─────────────────────────────────────────── */
 .menu__link {
   border-radius: 7px; font-size: 13.5px;
@@ -176,35 +232,26 @@ div[class*='codeBlockContainer']:hover { border-color: rgba(99,102,241,0.3) !imp
   border-bottom-color: rgba(99,102,241,0.5);
 }
 
-/* ══════════════════════════════════════════════════════
-   FOOTER — centered, responsive, branded
-   ══════════════════════════════════════════════════════ */
+/* ── Footer ──────────────────────────────────────────── */
 .footer {
   background: var(--tx-footer-bg) !important;
   border-top: 1px solid var(--tx-border) !important;
   padding: 64px 24px 40px !important;
 }
-
-/* The actual row that holds the columns */
 .footer .row {
   justify-content: center !important;
   gap: 0 !important;
 }
-
-/* Each column — equal spacing via padding */
 .footer__col {
   text-align: left !important;
   padding: 0 32px !important;
   margin-bottom: 40px !important;
 }
-
-/* Remove Docusaurus default col sizing — let content size itself */
 .footer .col {
   flex: 0 0 auto !important;
   max-width: none !important;
   width: auto !important;
 }
-
 .footer__title {
   font-size: 10px !important;
   text-transform: uppercase !important;
@@ -213,7 +260,6 @@ div[class*='codeBlockContainer']:hover { border-color: rgba(99,102,241,0.3) !imp
   color: var(--tx-text) !important;
   margin-bottom: 14px !important;
 }
-
 .footer__link-item {
   font-size: 13px !important;
   color: var(--tx-text-muted) !important;
@@ -222,53 +268,32 @@ div[class*='codeBlockContainer']:hover { border-color: rgba(99,102,241,0.3) !imp
   text-decoration: none !important;
   display: block;
 }
-
 .footer__link-item:hover {
   color: var(--ifm-color-primary) !important;
   padding-left: 4px !important;
   text-decoration: none !important;
 }
-
-/* Copyright bar */
 .footer__bottom {
   text-align: center !important;
   border-top: 1px solid var(--tx-border) !important;
   padding-top: 28px !important;
   margin-top: 0 !important;
 }
-
 .footer__copyright {
   font-size: 12px !important;
   color: var(--tx-text-faint) !important;
 }
 
-/* Tablet ≤768px */
+/* ── Footer responsive ───────────────────────────────── */
 @media (max-width: 768px) {
-  .footer {
-    padding: 48px 20px 32px !important;
-  }
-  .footer__col {
-    padding: 0 20px !important;
-  }
+  .footer { padding: 48px 20px 32px !important; }
+  .footer__col { padding: 0 20px !important; }
 }
-
-/* Mobile ≤560px */
 @media (max-width: 560px) {
-  .footer {
-    padding: 40px 20px 28px !important;
-  }
-  .footer .row {
-    flex-direction: column !important;
-  }
-  .footer__col {
-    padding: 0 4px !important;
-    margin-bottom: 28px !important;
-  }
-  .footer__items {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 0 20px !important;
-  }
+  .footer { padding: 40px 20px 28px !important; }
+  .footer .row { flex-direction: column !important; }
+  .footer__col { padding: 0 4px !important; margin-bottom: 28px !important; }
+  .footer__items { display: flex !important; flex-wrap: wrap !important; gap: 0 20px !important; }
 }
 
 /* ── Pagination ──────────────────────────────────────── */
@@ -290,20 +315,3 @@ div[class*='codeBlockContainer']:hover { border-color: rgba(99,102,241,0.3) !imp
 /* ── Page transition ─────────────────────────────────── */
 .main-wrapper { animation: pageFadeIn 0.3s ease both; }
 @keyframes pageFadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-
-/* Transparent background on Downloads hover */
-.navbar__link--active,
-.navbar__item.dropdown:hover .navbar__link {
-  background-color: transparent !important;
-}
-
-/* Dropdown menu items match navbar link animation */
-.dropdown__link {
-  transition: color var(--ifm-transition-fast) ease;
-}
-
-.dropdown__link:hover {
-  background-color: transparent !important;
-  color: var(--ifm-navbar-link-hover-color);
-}
-

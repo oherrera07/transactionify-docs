@@ -132,10 +132,14 @@ const config = {
           {
             label: 'Postman Collection',
             href: '/files/postman_collection.json',
+            target: '_blank',
+            rel: 'noopener noreferrer'
           },
           {
             label: 'Postman Environment',
             href: '/files/postman_environment.json',
+            target: '_blank',
+            rel: 'noopener noreferrer'
           },
         ],
       },
