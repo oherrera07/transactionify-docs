@@ -76,7 +76,7 @@ This portal is designed to help you **integrate with Transactionify quickly, sec
 ## Evaluation
 
 | **Feature**                      | **Implemented**   | **Notes**                  |
-|:---------------------------------|:-----------------:|:--------------------------:|
+|:---------------------------------|:--------------------:|:--------------------------:|
 | **Docusaurus Site Deployed**     | [ x ] Yes / [ ] No  |https://oherrera07.github.io/transactionify-docs/                            |
 | **Live API Requests (Bonus)**    | [ x ] Yes / [ ] No  |https://oherrera07.github.io/transactionify-docs/docs/sandbox/api-explorer                            |
 | **Dark Mode Support (Bonus)**    | [ x ] Yes / [ ] No  |                            |
