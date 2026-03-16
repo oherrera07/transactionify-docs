@@ -141,7 +141,7 @@ div[class*='announcementBarClose'] { color: var(--tx-text-muted) !important; }
 
 /* ── Navbar mobile ───────────────────────────────────── */
 .navbar-sidebar {
-  height: 55vh !important;
+  height: 100vh !important;
   max-height: 100vh !important;
   background: #ffffff !important;
   backdrop-filter: none !important;
@@ -152,29 +152,6 @@ div[class*='announcementBarClose'] { color: var(--tx-text-muted) !important; }
 }
 .navbar-sidebar__brand {
   border-bottom: 1px solid var(--tx-border) !important;
-}
-.navbar-sidebar__items {
-  height: calc(100vh - var(--ifm-navbar-height)) !important;
-  overflow-y: auto !important;
-  padding: 8px !important;
-}
-.navbar-sidebar__item .menu__list-item a.menu__link {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  color: #0f0f1a !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  padding: 10px 12px !important;
-  border-radius: 7px !important;
-  background: transparent !important;
-}
-[data-theme='dark'] .navbar-sidebar__item .menu__list-item a.menu__link {
-  color: #e2e8f0 !important;
-}
-.navbar-sidebar__item .menu__list-item a.menu__link:hover {
-  background: rgba(99,102,241,0.1) !important;
-  color: var(--ifm-color-primary) !important;
 }
 
 /* ── Dropdown ────────────────────────────────────────── */

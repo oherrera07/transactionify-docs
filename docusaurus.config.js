@@ -115,7 +115,7 @@ const config = {
             label: 'API Explorer',
           },
           {
-            to: '/docs/architectural-overview/architecture',
+            to: '/docs/arch-overview/architecture',
             position: 'left',
             label: 'Architecture',
           },
@@ -150,11 +150,19 @@ const config = {
         style: 'light',
         links: [
           {
+            title: 'Try It',
+            items: [
+              { label: 'Sandbox', href: '/docs/sandbox/api-explorer'}
+            ]
+          },
+          {
             title: 'Docs',
             items: [
               { label: 'Quick start', to: '/docs/getting-started/quickstart' },
               { label: 'Guides',      to: '/docs/tutorials/make-payment' },
               { label: 'API Explorer', to: '/docs/sandbox/api-explorer' },
+              { label: 'Architecture', to: '/docs/arch-overview/architecture' },
+              { label: 'Internal Guide', to: '/docs/internal-docs/engineering-guide' },
             ],
           },
           {
@@ -164,6 +172,7 @@ const config = {
               { label: 'Postman Environment',      href: '/files/postman_environment.json', target: '_blank', },
             ],
           },
+          
           
         ],
         copyright: `© ${new Date().getFullYear()} Transactionify. All rights reserved.`,
