@@ -69,10 +69,6 @@ To begin using Transactionify:
 
 ---
 
-## Support
-
-If you have questions or encounter issues during integration, please refer to the **Troubleshooting** section or contact the appropriate LoanPro team for assistance.
-
 
 This portal is designed to help you **integrate with Transactionify quickly, securely, and reliably**, enabling you to build financial solutions on top of the LoanPro platform.
 
