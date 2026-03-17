@@ -177,6 +177,7 @@ The `id` field in the response is your `account_id`. You will use it to check yo
 | `400` | `Invalid currency` | The `currency` in the body differs from the allowed currencies. | Use one of: `USD`, `EUR`, or `GBP`. |
 | `400` | `Missing required field: currency` | The `currency` is missing from the request body. | Make sure your request body includes the `currency` field. |
 | `401` | `Unauthorized` | Your API Key is missing or invalid. | Check the `Authorization` header format: `APIKey <your-key>`.|
+| `403` | `Forbidden` | bad API key or missing permission | Verify API Key is correct and make sure it has the proper rights |
 | `500` | `An error occurred` | Unexpected server error. | Try again or contact support. |
 
 ---
