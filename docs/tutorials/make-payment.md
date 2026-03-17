@@ -221,7 +221,7 @@ A successful request returns HTTP `200` with the payment details:
 | `400` | `Currency does not match account currency` | The `currency` in the body differs from the account's currency. | Use the same currency the account was created with. |
 | `400` | `Missing required field: amount` | The `amount` object is missing from the request body. | Include `amount.value` and `amount.currency` in the body. |
 | `401` | `Unauthorized` | API Key is missing or invalid. | Verify the `Authorization` header format: `APIKey <your-key>`. |
-| `403` | `Forbidden` | bad API key or missing permission | Verify API Key is correct and make sure it has the proper rights |
+| `403` | `Forbidden` | Bad API key or missing permission | Verify API Key is correct and make sure it has the proper rights |
 | `404` | `Account not found` | The `account_id` in the path does not exist. | Double-check the account ID. |
 | `500` | `An error occurred` | Unexpected server error. | Try again or contact support. |
 

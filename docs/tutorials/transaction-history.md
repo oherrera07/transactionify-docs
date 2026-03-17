@@ -272,7 +272,7 @@ The `next_cursor` is an opaque base64-encoded string that points to the last ite
 |---|---|---|---|
 | `400` | `Invalid pagination cursor` | The `cursor` value is malformed or expired. | Remove the cursor and start from the first page. |
 | `401` | `Unauthorized` | API Key is missing or invalid. | Verify the `Authorization` header format: `APIKey <your-key>`. |
-| `403` | `Forbidden` | bad API key or missing permission | Verify API Key is correct and make sure it has the proper rights |
+| `403` | `Forbidden` | Bad API key or missing permission | Verify API Key is correct and make sure it has the proper rights |
 | `404` | `Account not found` | The `account_id` in the path does not exist. | Double-check the account ID. |
 | `500` | `An error occurred` | Unexpected server error. | Try again or contact support. |
 
