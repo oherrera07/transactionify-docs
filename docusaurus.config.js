@@ -150,7 +150,7 @@ const config = {
         style: 'light',
         links: [
           {
-            title: 'Try It',
+            title: 'Try It Out',
             items: [
               { label: 'Sandbox', href: '/docs/sandbox/api-explorer'}
             ]
