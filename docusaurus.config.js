@@ -131,16 +131,9 @@ const config = {
         items: [
           {
             label: 'Postman Collection',
-            href: '/files/postman_collection.json',
-            target: '_blank',
-            rel: 'noopener noreferrer'
+            href: 'https://oherrera07.github.io/transactionify-docs/files/postman-collection.zip',
           },
-          {
-            label: 'Postman Environment',
-            href: '/files/postman_environment.json',
-            target: '_blank',
-            rel: 'noopener noreferrer'
-          },
+          
         ],
       },
         ],
@@ -168,8 +161,8 @@ const config = {
           {
             title: 'Downloads',
             items: [
-              { label: 'Postman Collection', href: '/files/postman_collection.json', target: '_blank', },
-              { label: 'Postman Environment',      href: '/files/postman_environment.json', target: '_blank', },
+              { label: 'Postman Collection', href: 'https://oherrera07.github.io/transactionify-docs/files/postman-collection.zip', },
+              
             ],
           },
           
